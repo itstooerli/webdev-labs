@@ -25,15 +25,19 @@ def exercise1():
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
         <body>
-            <h1>Hello World!</h1>
+            <h1>Hello abc {name}!</h1>
         </body>
         </html>
-    '''
+    '''.format(
+        name = current_user.get('name') 
+    )
 
 @app.route('/e2')
 def exercise2():
+    message = request.args.get('message')
     return render_template(
-        'index.html'
+        'index.html',
+        message=message
     )
 
 @app.route('/e3')
