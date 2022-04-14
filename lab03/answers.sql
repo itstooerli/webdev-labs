@@ -17,7 +17,7 @@ ORDER BY last_name;
 
 
 -- Exercise 4
-SELECT id, user_id, image_url
+SELECT id, image_url, user_id
 FROM posts
 WHERE user_id=26;
 
@@ -54,10 +54,10 @@ WHERE users.id=26 or users.id=12;
 
 
 -- Exercise 9
-SELECT posts.id, posts.pub_date following.following_id
+SELECT posts.id, posts.pub_date, following.following_id
 FROM posts
 INNER JOIN following ON posts.user_id = following.following_id
-WHERE following.users_id=26;
+WHERE following.user_id=26;
 
 
 
@@ -67,7 +67,8 @@ SELECT posts.id, posts.pub_date, following.following_id, users.username
 FROM posts
 INNER JOIN following ON posts.user_id = following.following_id 
 INNER JOIN users ON posts.user_id = users.id
-WHERE following.users_id=26;
+WHERE following.user_id=26
+ORDER BY pub_date desc;
 
 
 
@@ -78,21 +79,27 @@ VALUES(26, 219, now());
 INSERT INTO bookmarks(user_id, post_id, timestamp)
 VALUES(26, 220, now());
 
-INSERT INTO booksmarks(user_id, post_id, timestamp)
+INSERT INTO bookmarks(user_id, post_id, timestamp)
 VALUES(26, 221, now());
 
 
 
 -- Exercise 12
 DELETE FROM bookmarks
-WHERE post_id >= 219 AND post_id <= 221;
+WHERE post_id=219;
+
+DELETE FROM bookmarks
+WHERE post_id=220;
+
+DELETE FROM bookmarks
+WHERE post_id=221;
 
 
 
 -- Exercise 13
 UPDATE users
 SET email='knick2022@gmail.com'
-WHERE user_id=26;
+WHERE id=26;
 
 
 
@@ -102,4 +109,4 @@ FROM posts
 INNER JOIN comments on comments.post_id = posts.id
 WHERE posts.user_id = 26
 GROUP BY posts.id
-ORDER BY posts.id desc;
+ORDER BY count(comments.id) desc;
