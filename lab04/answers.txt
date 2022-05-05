@@ -1,0 +1,13 @@
+Lab04
+
+- What is the value of SQLAlchemy?
+SQLAlchemy is (sometimes) easier to use when working with databases as it is in python. It also
+uses the same commands for many SQL-based databases. Therefore, if you ever need to change databases
+the SQLAlchemy commands will still work.
+
+- What is a model?
+Models are user-defined Python classes and objects that are associated with database tables.
+
+- What is a view?
+Views are the API endpoints that allow other clients to interact with our database in a structured manner.
+For example, it can define the GET method and the JSON container that it returns.
