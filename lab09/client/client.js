@@ -176,7 +176,7 @@ const updateUsersList = data => {
 }
 
 const user2Html = user => {
-    return `<li role="status" aria-live="polite"> ${user} </li>`;
+    return `<li> ${user} </li>`;
 }
 
 const updateChat = data => {
@@ -186,8 +186,8 @@ const updateChat = data => {
 
 const chat2Html = data => {
     if (data.username === username){
-        return `<p role="log" class="right" aria-live="polite"> <strong role="log">${data.username}:</strong> ${data.text} </p>`
+        return `<p class="right"> <strong>${data.username}:</strong> ${data.text} </p>`
     }
 
-    return `<p role="log" class="left" aria-live="polite"> <strong role="log">${data.username}:</strong> ${data.text} </p>`
+    return `<p class="left"> <strong>${data.username}:</strong> ${data.text} </p>`
 }
