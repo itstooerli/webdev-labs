@@ -1,40 +1,53 @@
 import React from 'react';
+import Posts from './Posts';
+import Stories from './Stories';
+import Suggestions from './Suggestions';
+import Profile from './Profile';
+import NavBar from './NavBar';
+import {getHeaders} from './utils';
 
 {/* TODO: Break up the HTML below into a series of React components. */}
 class App extends React.Component {  
+
+    constructor(props) {
+        super(props);
+        // issue a fetch request to /api/profile endpoint:
+        this.getProfileFromServer();
+        this.state = {
+            user: {}
+        }
+    }
+
+    getProfileFromServer () {
+        fetch('/api/profile', {
+            headers: getHeaders()
+        })
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);
+            this.setState({
+                user: data
+            })
+        })
+    }
 
     render () {
         return (
             <div>
 
-            <nav className="main-nav">
-                <h1>Photo App</h1>
-                {/* Navigation Links */}
-            </nav>
+                <NavBar title="Photo App" username={this.state.user.username}/>
 
             <aside>
-                <header>
-                    Profile
-                    {/* Navigation Links */}
-                </header>
+                <Profile />
                 <div className="suggestions">
                     <p className="suggestion-text">Suggestions for you</p>
-                    <div>
-                        Suggestions
-                        {/* Suggestions */}
-                    </div>
+                    <Suggestions />
                 </div>
             </aside>
 
             <main className="content">
-                <header className="stories">
-                    Stories
-                    {/* Stories */}
-                </header>
-                <div id="posts">
-                    Posts
-                    {/* Posts */}
-                </div>
+                <Stories />
+                <Posts />
             </main>
 
             </div>
