@@ -1,33 +1,33 @@
 import React from 'react';
 import {getHeaders} from './utils';
 
-class LikeButton extends React.Component {
+class BookmarkButton extends React.Component {
 
     constructor(props) {
         super(props);
         // initialization code here
 
         // binding "this":
-        this.toggleLike = this.toggleLike.bind(this);
-        this.createLike = this.createLike.bind(this);
-        this.removeLike = this.removeLike.bind(this);
+        this.toggleBookmark = this.toggleBookmark.bind(this);
+        this.createBookmark = this.createBookmark.bind(this);
+        this.removeBookmark = this.removeBookmark.bind(this);
     }
 
     componentDidMount() {
         // fetch posts and then set the state...
     }
 
-    toggleLike () {
-        if (this.props.likeId) {
-            this.removeLike();
+    toggleBookmark () {
+        if (this.props.bookmarkId) {
+            this.removeBookmark();
         } else {
-            this.createLike();
+            this.createBookmark();
         }
     }
 
-    createLike () {
-        const url = '/api/posts/likes';
-        // console.log('create like:', url);
+    createBookmark () {
+        const url = '/api/bookmarks';
+        // console.log('create Bookmark:', url);
 
         const postData = {
             post_id: this.props.postId
@@ -48,9 +48,9 @@ class LikeButton extends React.Component {
         })
     }
 
-    removeLike () {
-        const url = '/api/posts/likes/' + this.props.likeId;
-        // console.log('remove like:', url);
+    removeBookmark () {
+        const url = '/api/bookmarks/' + this.props.bookmarkId;
+        // console.log('remove Bookmark:', url);
         
         fetch(url, {
             method: 'DELETE',
@@ -66,16 +66,16 @@ class LikeButton extends React.Component {
     }
 
     render () {
-        const likeId = this.props.likeId;
-        const heartClass = (likeId ? 'fas' : 'far') + ' fa-heart';
+        const bookmarkId = this.props.bookmarkId;
+        const bookmarkClass = (bookmarkId ? 'fas' : 'far') + ' fa-bookmark';
         return (
             <button 
-                onClick={this.toggleLike}
-                aria-label="Like / Unlike">
-                <i className={heartClass}></i>
+                onClick={this.toggleBookmark}
+                aria-label="Bookmark / UnBookmark">
+                <i className={bookmarkClass}></i>
             </button>
         )
     }
 }
 
-export default LikeButton;
+export default BookmarkButton;
